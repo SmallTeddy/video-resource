@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "search-by-python": "python3 ./src/main.py",
+    "search-cili-by-python": "python3 ./src/cilijia.py",
     "search-by-javascript": "node ./src/main.js",
     "search-by-rust": "cargo run"
     
