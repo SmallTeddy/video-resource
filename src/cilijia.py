@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+import json
+import execjs  # 导入 execjs
 
 # 获取用户输入
 name = input("请输入要搜索的名称: ")
@@ -41,27 +43,36 @@ def get_search_page(page):
     print(response.text)
     
     
-def get_total_page():
+def get_search_data():
     params = {
-          'q': name,
-      }
+        'q': name,
+    }
     response = requests.get('https://cilijia.net/search', params=params, cookies=cookies, headers=headers)
     html_content = response.text
-    # 使用BeautifulSoup解析HTML
-    soup = BeautifulSoup(html_content, 'html.parser')
-    # 查找class为total-meta的标签
-    total_meta = soup.find('p', class_='total-meta')
-    # 获取并打印标签的内容
+    html_text = BeautifulSoup(html_content, 'html.parser')
+    
+    total_meta = html_text.find('p', class_='total-meta')
     if total_meta:
-      # 使用正则表达式查找数字
-      numbers = re.findall(r'\d+', total_meta.get_text())
-      # 将找到的第一个数字转换为整数
-      data_total = int(numbers[0]) if numbers else 0
-      
-      total_page = data_total // 10 + (1 if data_total % 10 > 0 else 0)
-      # print(data_total, total_page, '页')
+        numbers = re.findall(r'\d+', total_meta.get_text())
+        data_total = int(numbers[0]) if numbers else 0
+        total_page = data_total // 10 + (1 if data_total % 10 > 0 else 0)
     else:
         print("没有找到class为total-meta的标签")
-  
-  
-get_total_page()
+    
+    script_tags = html_text.find_all('script')
+    if script_tags:
+        for index, script in enumerate(script_tags):
+            script_content = script.string
+            if script_content:
+                if 'window.__NUXT__' in script_content:
+                    print(script_content)
+                    # function_body = script_content.split('=')[1]
+                    # context = execjs.compile(function_body)
+                    # result = context.call("getData") 
+                    # print(result)
+    else:
+        print("没有找到任何script标签")
+
+get_search_data()
+
+# print(total_data_list)
