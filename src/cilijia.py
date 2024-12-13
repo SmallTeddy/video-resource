@@ -73,6 +73,12 @@ def get_search_data():
     else:
         print("没有找到任何script标签")
 
-get_search_data()
+def main():
+    # 获取用户输入
+    name = input("请输入要搜索的名称: ")
+    get_search_data()
+
+if __name__ == "__main__":
+    main()
 
 # print(total_data_list)

@@ -44,7 +44,7 @@ pip install requests json time
 python main.py
 
 # 执行 package 命令
-npm run search-by-python
+npm run search-video-by-python
 ```
 
 ![python](./assets/python.png)
