@@ -41,7 +41,7 @@ pip install requests json time
 
 ```bash
 # python 直接运行
-python main.py
+python3 ./src/main.py
 
 # 执行 package 命令
 npm run search-video-by-python

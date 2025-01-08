@@ -6,9 +6,12 @@
   "type": "module",
   "scripts": {
     "search-video-by-python": "python3 ./src/main.py",
-    "search-cili-by-python": "python3 ./src/cilijia.py"
+    "search-cili-by-python": "python3 ./src/cilijia.py",
+    "search-pan": "python3 ./src/pansou.py"
   },
   "author": "SmallTeddy",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "crypto": "^1.0.1"
+  }
 }
